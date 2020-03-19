@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 // changed pt import to fix bug
@@ -8,7 +8,7 @@ import {PropTypes as propTypes} from 'prop-types';
 
 
 // destructured setAlert from the props thats possible via the connect pkg
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
 
     const [formData, setFormData] = useState({
         name: '',
@@ -30,7 +30,13 @@ const Register = ({ setAlert, register }) => {
         } else {
            register({ name, email, password });
         }
+    };
+
+    // If isAuthenicated
+    if (isAuthenticated) {
+        return <Redirect to='/dashboard' />;
     }
+
     return (
         <Fragment>
             <h1 className="large text-primary">Sign Up</h1>
@@ -100,8 +106,13 @@ const Register = ({ setAlert, register }) => {
 Register.propTypes = {
     setAlert: propTypes.func.isRequired,
     register: propTypes.func.isRequired,
+    isAuthenticated: propTypes.bool
 }
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
 
 // when you import an action you have to pass it to the connect cb that's being exported
 //takes two args (any state you want to map) & an object with actions used
-export default connect(null, { setAlert, register })(Register);
+export default connect(mapStateToProps, { setAlert, register })(Register);
