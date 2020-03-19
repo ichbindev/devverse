@@ -1,8 +1,13 @@
-import React, { Fragment, useState } from 'react'
-import { Link } from 'react-router-dom'
-// import axios from 'axios'
+import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { setAlert } from '../../actions/alert';
+// changed pt import to fix bug
+import {PropTypes as propTypes} from 'prop-types';
 
-const Register = () => {
+
+// destructured setAlert from the props thats possible via the connect pkg
+const Register = ({ setAlert }) => {
 
     const [formData, setFormData] = useState({
         name: '',
@@ -18,7 +23,9 @@ const Register = () => {
         e.preventDefault();
         // make sure passwords match
         if (password !== password2) {
-            console.log('passwords do not match');
+            // SET ALERT to the props
+            // * if you want you can add a timer to this cb by adding another arg in milliseconds after 'danger' *
+            setAlert('passwords do not match', 'danger');
         } else {
             console.log('success!!!!')
             // THIS WILL BE DONE WITH REDUX
@@ -107,5 +114,12 @@ const Register = () => {
             </p>
         </Fragment>
     )
+};
+
+Register.propTypes = {
+    setAlert: propTypes.func.isRequired
 }
-export default Register;
+
+// when you import an action you have to pass it to the connect cb that's being exported
+//takes two args (any state you want to map) & an object with actions used
+export default connect(null, { setAlert })(Register);
