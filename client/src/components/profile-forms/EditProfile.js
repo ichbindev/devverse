@@ -1,11 +1,11 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { PropTypes as propTypes } from 'prop-types';
 import { connect } from 'react-redux';
 // action
-import { createProfile } from '../../actions/profile'
+import { createProfile, getCurrentProfile } from '../../actions/profile'
 
-const CreateProfile = ({ createProfile, history }) => {
+const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentProfile, history }) => {
 
     const [formData, setFormData] = useState({
         company: '',
@@ -23,6 +23,25 @@ const CreateProfile = ({ createProfile, history }) => {
     });
 
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
+
+    useEffect(() => {
+        getCurrentProfile();
+        // also fill the form with the current values
+        setFormData({
+            company: loading || !profile.company ? '' : profile.company,
+            website: loading || !profile.website ? '' : profile.website,
+            location: loading || !profile.location ? '' : profile.location,
+            status: loading || !profile.status ? '' : profile.status,
+            skills: loading || !profile.skills ? '' : profile.skills.join(','),
+            githubusername: loading || !profile.githubusername ? '' : profile.githubusername,
+            bio: loading || !profile.bio ? '' : profile.bio,
+            twitter: loading || !profile.socialr ? '' : profile.social.twitter,
+            facebook: loading || !profile.social ? '' : profile.social.facebook,
+            linkedIn: loading || !profile.social ? '' : profile.social.linkedIn,
+            youtube: loading || !profile.social ? '' : profile.social.youtube,
+            instagram: loading || !profile.social ? '' : profile.social.instagram
+        });
+    }, [loading])
 
     // destructure form fields from state to use as js expressions('variables')
     const {
@@ -45,7 +64,7 @@ const CreateProfile = ({ createProfile, history }) => {
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
     const onSubmit = e => {
         e.preventDefault();
-        createProfile(formData, history)
+        createProfile(formData, history, true)
     }
 
     return (
@@ -159,13 +178,16 @@ const CreateProfile = ({ createProfile, history }) => {
     )
 }
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
     createProfile: propTypes.func.isRequired,
+    profile: propTypes.object.isRequired,
+    getCurrentProfile: propTypes.func.isRequired,
+
 }
 
-// const mapStateToProps = ({
-    
-// })
+const mapStateToProps = state => ({
+    profile: state.profile
+})
 
 // withRouter wraps component so that we can access the history object in our action method
-export default connect(null, { createProfile })(withRouter(CreateProfile));
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(EditProfile));
