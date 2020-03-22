@@ -5,7 +5,8 @@ import {
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGOUT
+    LOGOUT,
+    ACCOUNT_DELETED
 } from '../actions/types';
 
 /**
@@ -74,7 +75,15 @@ import {
                 token: null,
                 isAuthenticated: false,
                 loading: false
-            }    
+            }
+        case ACCOUNT_DELETED:
+            localStorage.removeItem('token');
+            return {
+                ...state,
+                token: null,
+                isAuthenticated: false,
+                loading: false
+            }        
         case AUTH_ERROR:  
             localStorage.removeItem('token');
             return {
