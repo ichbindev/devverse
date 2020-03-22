@@ -69,7 +69,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
 
     return (
         <Fragment>
-            <h1 className="large text-primary">Create Your Profile</h1>
+            <h1 className="large text-primary">Edit Your Profile</h1>
             <p className="lead">
                 <i className="fas fa-user" /> The more info you give, the more you'll stand out!
             </p>
