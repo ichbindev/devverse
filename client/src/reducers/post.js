@@ -8,7 +8,10 @@ import {
     POST_ERROR,
     UPDATE_LIKES,
     DELETE_POST,
-    ADD_POST
+    ADD_POST,
+    GET_POST,
+    ADD_COMMENT,
+    REMOVE_COMMENT
 } from '../actions/types'
 
 
@@ -29,10 +32,19 @@ export default function(state = initialState, action) {
                 posts: payload,
                 loading: false
             }
+        case GET_POST:
+            return {
+                ...state,
+                post: payload,
+                loading: false
+            }    
         case ADD_POST:
             return {
                 ...state,
                 //the spreader in the array makes a copy of the post object and sends the payload
+                // brad swapped th spreded state.post with the payload so the recent post is on top
+                // however i just added a reload cb to the method to refresh the screen which gives the same result
+                // this is a comment to mark this spot to change if i end up needing to do that for some reason for a bug
                 posts: [...state.post, payload],
                 loading: false
             }    
@@ -53,7 +65,22 @@ export default function(state = initialState, action) {
                 ...state,
                 posts: state.posts.map(post => post._id === payload.id ? { ...post, likes: payload.likes } : post),
                 loading: false 
-            }    
+            }
+        case ADD_COMMENT:
+            return {
+                ...state,
+                post: { ...state.post, comments: payload },
+                loading: false
+            }
+        case REMOVE_COMMENT:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    comments: state.post.comments.filter(comment => comment._id !== payload)
+                },
+                loading: false
+            }            
         default:
             return state;        
     }

@@ -10,7 +10,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
 
     useEffect(() => {
         getPosts();
-    }, [getPosts])
+    }, [getPosts]);
 
 
     return loading ? <Spinner /> : (
@@ -19,7 +19,6 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
             <p className="lead">
                 <i className="fas fa-user"/> Welcome to the Community!
             </p>
-            {/* POST FORM */}
             <PostForm />
             <div className="posts">
                 {posts.map(post => (
@@ -28,7 +27,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
             </div>
         </Fragment>
     )
-}
+};
 
 Posts.propTypes = {
     getPosts: propTypes.func.isRequired,

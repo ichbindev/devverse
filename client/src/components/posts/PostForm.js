@@ -35,7 +35,7 @@ const PostForm = ({ addPost }) => {
             </form>
         </div>
     )
-}
+};
 
 PostForm.propTypes = {
     addPost: propTypes.func.isRequired
