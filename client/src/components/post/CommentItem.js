@@ -23,12 +23,21 @@ const CommentItem = ({
       <p className="post-date">
         Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
       </p>
+      {!auth.loading && user === auth.user._id && (
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={e => deleteComment(postId, _id)}
+        >
+          <i className="fas fa-times"/>
+        </button>
+      )}
     </div>
   );
 };
 
 CommentItem.propTypes = {
-  //   deleteComment: propTypes.func.isRequired,
+  deleteComment: propTypes.func.isRequired,
   postId: propTypes.number.isRequired,
   comment: propTypes.object.isRequired,
   auth: propTypes.object.isRequired
@@ -38,4 +47,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {})(CommentItem);
+export default connect(mapStateToProps, { deleteComment })(CommentItem);

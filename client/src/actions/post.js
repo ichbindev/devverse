@@ -161,7 +161,7 @@ export const deleteComment = (postId, commentId) => async dispatch => {
     try {
         // if theres an issue w the post it has to be cuz of the rout after changing the post route before ...i could be wrong tho and everthings fine
         // removed constVar because the payload is targeting the commentId and not res.data ***********
-        await axios.delete(`api/posts/comment/${postId}/${commentId}`);
+        await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
         dispatch({
             type: REMOVE_COMMENT,
             payload: commentId
