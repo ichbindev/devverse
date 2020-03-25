@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import Spinner from '../Layout/Spinner';
 import PostItem from '../posts/PostItem';
 import CommentForm from '../post/CommentForm';
+import CommentItem from  '../post/CommentItem';
 // action(s) for connect
 import { getPost } from '../../actions/post';
 
@@ -16,7 +17,8 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
         getPost(match.params.id)
         // in video he didnt also pass the match params id like he did in profile
         // this is a marker comment to remind me if anything this i a spot to go back to
-    }, [getPost, match.params.id])
+    }, [getPost, match.params.id]);
+
 
 
     return loading || post === null ? <Spinner /> : <Fragment>
@@ -25,6 +27,15 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
         </Link>
         <PostItem post={post} showActions={false} />
         <CommentForm postId={post._id} />
+        <div className="comments">
+            {post.comments.map(comment => (
+                <CommentItem 
+                    key={comment._id} 
+                    comment={comment} 
+                    postId={post._id} 
+                />
+            ))}
+        </div>
     </Fragment>
 }
 
