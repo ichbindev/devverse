@@ -19,6 +19,7 @@ const CommentForm = ({ postId, addComment }) => {
           e.preventDefault();
           addComment(postId, { text });
           setText("");
+          window.location.reload(false)
         }}
       >
         <textarea
