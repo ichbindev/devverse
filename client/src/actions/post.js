@@ -129,20 +129,18 @@ export const getPost = id => async dispatch => {
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
-// __________*_ eveything below is where there is an issue to resolve the 404 error  _*____________
+// __________*_ EVERYTHING ABOVE THIS LINE WORKS  _*____________
 // Add comment
 export const addComment = (postId, formData) => async dispatch => {
-
     // since we are sending data we need to create a config object for the applicaiton type: application/json>>contentType
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     };
-    
     try {
         // if theres an issue w the post it has to be cuz of the rout after changing the post route before ...i could be wrong tho and everthings fine
-        const res = await axios.post(`api/posts/comment/${postId}`, formData, config);
+        const res = await axios.post(`/api/posts/comment/${postId}`, formData, config);
         dispatch({
             type: ADD_COMMENT,
             payload: res.data
@@ -163,7 +161,7 @@ export const deleteComment = (postId, commentId) => async dispatch => {
     try {
         // if theres an issue w the post it has to be cuz of the rout after changing the post route before ...i could be wrong tho and everthings fine
         // removed constVar because the payload is targeting the commentId and not res.data ***********
-        await axios.delete(`api/post/comment/${postId}/${commentId}`);
+        await axios.delete(`api/posts/comment/${postId}/${commentId}`);
         dispatch({
             type: REMOVE_COMMENT,
             payload: commentId
