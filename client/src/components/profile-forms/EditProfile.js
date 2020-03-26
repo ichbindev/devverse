@@ -35,7 +35,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
             skills: loading || !profile.skills ? '' : profile.skills.join(','),
             githubusername: loading || !profile.githubusername ? '' : profile.githubusername,
             bio: loading || !profile.bio ? '' : profile.bio,
-            twitter: loading || !profile.socialr ? '' : profile.social.twitter,
+            twitter: loading || !profile.social ? '' : profile.social.twitter,
             facebook: loading || !profile.social ? '' : profile.social.facebook,
             linkedIn: loading || !profile.social ? '' : profile.social.linkedIn,
             youtube: loading || !profile.social ? '' : profile.social.youtube,
@@ -161,7 +161,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
                 {/* LINKEDIN */}
                 <div className="form-group social-input">
                     <i className="fab fa-linkedin fa-2x" />
-                    <input type="text" placeholder="LinkedIn URL" name="linkedIn" value={linkedIn} onChange={e => onChange(e)} />
+                    <input type="text" placeholder="LinkedIn URL" name="linkedin" value={linkedIn} onChange={e => onChange(e)} />
                 </div>
                 {/* INSTAGRAM */}
                 <div className="form-group social-input">

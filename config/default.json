@@ -1,6 +1,0 @@
-{
-    "mongoURI": "mongodb+srv://semajolleppa:sVnfifTone@devconnector-c8q6m.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret": "ythsismicsretekoten",
-    "githubClientId": "Iv1.a6d971ba84a72a8f",
-    "githubSecret": "aebb4a9c01dba4147778567f9aeb774981d2044b"
-}

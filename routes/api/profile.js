@@ -1,6 +1,8 @@
 const express = require('express');
 const request = require('request');
-const config = require('config');
+require('dotenv').config();
+const ghcid = process.env.GITUP_CLIENT_ID;
+const ghs = process.env.GITUP_SECRET;
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator')
@@ -342,7 +344,7 @@ router.get('/github/:username', (req, res) => {
     try {
         // Construct options object with a uri
         const options = {
-            uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClientId')}&client_secret=${config.get('githubSecret')}`,
+            uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${ghcid}&client_secret=${ghs}`,
             method: 'GET',
             headers: { 'user-agent': 'node.js' }
         };

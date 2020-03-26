@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const config = require('config');
+require('dotenv').config();
+const s = process.env.SHHH
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 // Bring in MIDDLEWARE
@@ -64,7 +65,7 @@ async (req,res) => {
             }
         };
         jwt.sign(payload, 
-            config.get('jwtSecret'),
+            s,
             { expiresIn: 36000 },
             (err, token) => {
                 if (err) throw err;
