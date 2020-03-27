@@ -1,12 +1,14 @@
 // MONGODB CONNECTION
 const mongoose = require('mongoose');
 require('dotenv').config();
-const mui = process.env.MONGO_URI;
-
+// const mui = process.env.MONGO_URI;
+const u = process.env.DB_USER;
+const up = process.env.WRD_PASS;
+const stringToTheGoose = `mongodb+srv://${u}:${up}@devconnector-c8q6m.mongodb.net/test?retryWrites=true&w=majority`
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(mui, {
+        await mongoose.connect(stringToTheGoose, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true,
