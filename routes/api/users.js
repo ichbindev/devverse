@@ -60,7 +60,7 @@ async (req,res) => {
             }
         };
         jwt.sign(payload, 
-            config.get('itsASecret'),
+            config.get('SECRET_STRING'),
             { expiresIn: 36000 },
             (err, token) => {
                 if (err) throw err;

@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-// require('dotenv').config();
-// const s = process.env.shhh
+
 const config = require('config');
 
 // middleware has acces to the request response and what happens 'next'
@@ -15,7 +14,7 @@ module.exports = function(req, res, next) {
 
     // Verify token
     try {
-        const decoded = jwt.verify(token, config.get('itsASecret'));
+        const decoded = jwt.verify(token, config.get('SECRET_STRING'));
         req.user = decoded.user;
         next();
     } catch (err) {

@@ -1,8 +1,6 @@
 const express = require('express');
 const request = require('request');
-// require('dotenv').config();
-// const ghcid = process.env.GITUP_CLIENT_ID;
-// const ghs = process.env.GITUP_SECRET;
+
 const config = require('config');
 const router = express.Router();
 const auth = require('../../middleware/auth');
