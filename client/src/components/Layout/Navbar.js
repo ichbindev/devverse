@@ -51,7 +51,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <nav className="navbar bg-dark">
       <h1>
         <Link to="/">
-          <i className="fas fa-user-secret" /> >Dev>Verse
+          <i className="fas fa-user-secret" /> DevVerse
         </Link>
       </h1>
       {!loading && (

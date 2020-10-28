@@ -23,7 +23,6 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
     });
 
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
-
     useEffect(() => {
         getCurrentProfile();
         // also fill the form with the current values
@@ -41,7 +40,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
             youtube: loading || !profile.social ? '' : profile.social.youtube,
             instagram: loading || !profile.social ? '' : profile.social.instagram
         });
-    }, [loading, getCurrentProfile])
+    }, [loading, getCurrentProfile, profile.company, profile.bio,profile.social, profile.website, profile.location, profile.status,profile.githubusername, profile.skills,profile.twitter,profile.facebook,profile.youtube,profile.instagram,profile.linkedIn])
 
     // destructure form fields from state to use as js expressions('variables')
     const {
@@ -75,6 +74,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
             </p>
             <small>* = required field</small>
             <form className="form" onSubmit={e => onSubmit(e)} >
+                
                 {/* SELECT-DROPDOWN */}
                 <div className="form-group">
                     <select name="status" value={status} onChange={e => onChange(e)}>

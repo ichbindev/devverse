@@ -45,7 +45,6 @@ async (req,res) => {
 
     const { email, password } = req.body;
     try {
-        //===============*|_\SECURITY/_|*==============
         //1- see if user DOES NOT exist
         let user = await User.findOne({ email });
         if (!user) {
@@ -57,14 +56,13 @@ async (req,res) => {
         if (!isMatch){
             return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] });
         }
-        //===============*|_/SECURITY\_|*==============
         const payload = {
             user: {
                 id: user.id
             }
         };
         jwt.sign(payload, 
-            config.get('itsASecret'),
+            config.get('SECRET_STRING'),
             { expiresIn: 36000 },
             (err, token) => {
                 if (err) throw err;

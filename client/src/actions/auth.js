@@ -35,16 +35,26 @@ export const loadUser = () => async dispatch => {
 };
 
 // Register a user
-export const register = ({ name, email, password }) => async dispatch => {
+export const register = ({ 
+    name, 
+    email, 
+    avatar, 
+    password 
+}) => async dispatch => {
     // send headers
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     };
-
+    avatar.toString().replace("/^C:\\fakepath\\$/","");
     // prep data to send
-    const body = JSON.stringify({ name, email, password });
+    const body = JSON.stringify({ 
+        name, 
+        email, 
+        avatar, 
+        password 
+    });
 
     try {
         const res = await axios.post('/api/users', body, config);

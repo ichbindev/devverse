@@ -22,7 +22,7 @@ const initialState = {
     error: {}
 }
 
-export default function(state = initialState, action) {
+export default function post(state = initialState, action) {
     // pull out type & payload from action
     const { type, payload } = action;
     switch (type) {

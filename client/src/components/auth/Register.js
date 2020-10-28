@@ -13,11 +13,18 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        avatar: '',
         password: '',
         password2: ''
     });
 
-    const { name, email, password, password2 } = formData;
+    const { 
+        name, 
+        email, 
+        avatar, 
+        password, 
+        password2 
+    } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
     const onSubmit = async e => {
@@ -28,7 +35,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             // * if you want you can add a timer to this cb by adding another arg in milliseconds after 'danger' *
             setAlert('passwords do not match', 'danger');
         } else {
-           register({ name, email, password });
+           register({ 
+               name, 
+               email, 
+               avatar, 
+               password });
         }
     };
 
@@ -64,9 +75,18 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                         onChange={e => onChange(e)}
                         // required 
                     />
-                    <small className="form-text">
+                <div className="form-group">
+                    <input 
+                        type="file" 
+                        name="avatar" 
+                        value={avatar} 
+                        onChange={e => onChange(e)} 
+                        // required 
+                    />
+                </div>
+                    {/* <small className="form-text">
                         This site uses gravatar so if you want a profile image, use an email that has an image icon uploaded to it...you're welcome lol.
-                    </small>
+                    </small> */}
                 </div>
                 <div className="form-group">
                     <input 

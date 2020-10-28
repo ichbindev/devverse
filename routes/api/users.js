@@ -29,19 +29,24 @@ async (req,res) => {
         return res.status(400).json({ errors: errors.array() })
     }
 
-    const { name, email, password } = req.body;
+    const { 
+        name, 
+        email, 
+        avatar, 
+        password 
+    } = req.body;
     try {
         //1- see if user exists
         let user = await User.findOne({ email });
         if (user) {
             res.status(400).json({ errors: [{ msg: 'User already exists' }] });
         }
-        //2- get users gravatar
-        const avatar = gravatar.url(email, {
-            s: '200',
-            r: 'pg',
-            d: 'mm'
-        });
+        // 2- get users gravatar
+        // const avatar = gravatar.url(email, {
+        //     s: '200',
+        //     r: 'pg',
+        //     d: 'retro'
+        // },true);
         user = new User({
             name,
             email,
@@ -60,7 +65,7 @@ async (req,res) => {
             }
         };
         jwt.sign(payload, 
-            config.get('SECRET_STR  ING'),
+            config.get('SECRET_STRING'),
             { expiresIn: 36000 },
             (err, token) => {
                 if (err) throw err;

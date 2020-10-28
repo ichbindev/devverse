@@ -30,7 +30,10 @@ const AddExperience = ({ addExperience, history }) => {
     } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-    
+    const onSubmit = e => {
+        e.preventDefault();
+        addExperience(formData, history);
+    }
 
     return (
         <Fragment>
@@ -40,10 +43,7 @@ const AddExperience = ({ addExperience, history }) => {
                 Add any past work xperiences you may hold now, or in the past.
             </p>
             <small>* = required field</small>
-            <form className="form" onSubmit={e => {
-                e.preventDefault();
-                addExperience(formData, history);
-            }}>
+            <form className="form" onSubmit={e => onSubmit(e)}>
                 <div className="form-group">
                     <input 
                         type="text" 

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { PropTypes as propTypes } from "prop-types";
 import { connect } from "react-redux";
